@@ -1,25 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { Board, BoardStatus } from './boards.model';
-import { v1 as uuid } from 'uuid';
+import {Injectable} from '@nestjs/common';
+import {Board, BoardStatus} from './boards.model';
+import {v1 as uuid} from 'uuid';
+import {CreateBoardDto} from './dto/create-board.dto';
 
 @Injectable()
 export class BoardsService {
-    private boards: Board[] = [];
+  private boards: Board[] = [];
 
-    getAllBoards(): Board[] {
-        return this.boards;
-    }
+  getAllBoards(): Board[] {
+    return this.boards;
+  }
 
-    createBoard(title: string, description: string) {
-        const board: Board = {
-            id: uuid(),
-            title,
-            description,
-            status:BoardStatus.PUBLIC
-        }
-        this.boards.push(board);
-        return board;
-    }
-
-    
+  createBoard(createBoardDto: CreateBoardDto) {
+    const {title, description} = createBoardDto;
+    const board: Board = {
+      id: uuid(),
+      title,
+      description,
+      status: BoardStatus.PUBLIC,
+    };
+    this.boards.push(board);
+    return board;
+  }
 }
