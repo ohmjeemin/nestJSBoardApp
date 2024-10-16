@@ -3,13 +3,9 @@ import {BoardsModule} from './boards/boards.module';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {typeORMConfig} from './configs/typeorm.config';
 import {Board} from './boards/board.entity';
-import {BoardRepository} from './boards/board.repository';
+import {BoardsService} from './boards/boards.service';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([BoardRepository]),
-    TypeOrmModule.forRoot(typeORMConfig),
-    BoardsModule,
-  ],
+  imports: [TypeOrmModule.forRoot(typeORMConfig), BoardsModule],
 })
 export class AppModule {}
